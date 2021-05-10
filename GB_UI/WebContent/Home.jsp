@@ -10,45 +10,69 @@
 		window.location.href = "Login.jsp";
 	}
 </script>
-<div class="jumbotron jumbotron-fluid">
-	<div class="container">
-		<h1 class="display-4">GadgetBadgetn</h1>
-		<p class="lead">Buy innovative products in a single place</p>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<div class="jumbotron jumbotron-fluid">
+				<div class="container">
+					<h1 class="display-4">GadgetBadgetn</h1>
+					<p class="lead">Buy innovative products in a single place</p>
+				</div>
+			</div>
+		</div>
+		<div class="col"></div>
 	</div>
 </div>
 
-<div class=" mx-auto " style="width: 7in; margin-top: 1cm">
+
+<div class=" mx-auto " style="margin-top: 1cm; margin-left: 1cm">
 	<table style="width: 100%">
 		<script>
-		//loading.gif
-			var count =1;
-			var i;
-			var j;
-			for (i = 0; i < 3; i++) {
-				document.write("<tr>");
-				for (j = 0; j < 3; j++) {
-					
-					document.write('<td><div class="card" style="width: 18rem;">'+
-					'<img class="card-img-top" src="Assets/item.svg"'+
-								'alt="Card image cap">'+
-							'<div class="card-body">'+
-								'<h5 class="card-title">item '+count+'</h5>'+
-								'<p class="card-text">Description</p>'+
-								'<div class="d-block"><button class="d-inline btn btn-primary">Add</button>'+
-								'<button class="d-inline btn btn-danger" style="visibility: hidden;">Remove</button></div>'+
-							'</div>'+
-						'</div></td>');
-					count++;
-					
-					
-
-				}
-				document.write("</tr>");
-			}
-			
+			printItemTable();
 		</script>
 
 	</table>
+
+	<div class="card">
+		<div class="card-body">
+			<div class="container">
+				<form class="">
+					<div class="row">
+						<div class="col">
+							<label for="" class="sr-only" id="singleItemNumber"
+								style="width: 3cm=">please select an item</label>
+						</div>
+						<div class="col">
+							<input type="number" class="form-control" id="itemQuantity" placeholder="Quantity"> 
+							<input type="hidden" class="form-control" id="itemID">
+						</div>
+						<div class="col">
+							<button type="button" id="sumbitItem" class="d-inline btn btn-primary">Add item to cart</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</br>
+	<p class="text-center">Your cart is here</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Quantity</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody id="home_item_tbl_body">
+
+		</tbody>
+	</table>
+	<script>
+		bringCartItemHandler();
+	</script>
+	<div id="home_cartitems"></div>
 </div>
 
 

@@ -7,12 +7,7 @@
 <script src="Components/jquery.js"></script>
 <script src="Components/Main.js"></script>
 <script type="text/javascript">
-	var x = document.cookie;
-	var res = x.split('#')
-	console.log(res[1]);
-	if (res[1] == "") {
-		window.location.href = "Login.jsp";
-	}
+
 </script>
 <head>
 <meta charset="utf-8">

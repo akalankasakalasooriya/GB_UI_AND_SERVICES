@@ -336,7 +336,7 @@ function onUpdateProfile(response, status) {
 		var key = res[1];
 		var uid = res[0];
 		logOut(key,uid); 
-		window.location.href = "Login.jsp";
+		
 		return true;
   } else {
     return false;
@@ -390,9 +390,53 @@ function logOut(key,id){
       processData: false,
       contentType: "application/json; charset=UTF-8",
       complete: function (response, status) {
-        onUpdatePassword(response.responseText, status);
+		document.cookie="";
+        window.location.href = "Login.jsp";
+		
       },
     });
     return false;
   
 }
+//----validations------
+
+//password
+//username
+$("#profilePassword  , #profileUsername").change(function() {
+	//
+		var str = $("#profileUsername").val();
+	if(str == ""){
+		
+		$("#profileUpdate").prop('disabled', true);
+	}
+	else{
+		$("#profileUpdate").prop('disabled', false);
+	}
+	//
+    var str = $("#profilePassword").val();
+	if(str.length < 8 || str == ""){
+		
+		$("#profileUpdate").prop('disabled', true);
+	}
+	else{
+		$("#profileUpdate").prop('disabled', false);
+	}
+	//
+
+	
+});
+
+
+//for number
+$('#itemQuantity').change(function() {
+    var qty = $("#itemQuantity").val();
+	if(qty >100 || qty < 1){
+		
+		$("#sumbitItem").prop('disabled', true);
+	}
+	else{
+		$("#sumbitItem").prop('disabled', false);
+	}
+	
+	
+});

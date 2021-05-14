@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="Components/style.css">
 <!-- header -->
 <script type="text/javascript">
-	document.cookie="";
+document.cookie="";
 </script>
 <title>Sign in</title>
 <body class="text-center">

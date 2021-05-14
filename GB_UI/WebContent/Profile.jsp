@@ -23,7 +23,7 @@
 
 	<div class="form-group row">
 		<div class="col-sm-10">
-			<button type="button" class="btn btn-primary" id="profileUpdate">Update</button>
+			<button type="button" class="btn btn-primary" id="profileUpdate" disabled>Update</button>
 		</div>
 	</div>
 </form>

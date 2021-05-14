@@ -24,7 +24,7 @@ var loginClickHandler = function (e) {
   item["username"] = str_un;
   item["password"] = str_pw;
 
-  if (isEmpty(item["username"], item["password"]) == 1) {
+  if (isEmpty(item["username"], item["password"])) {
     $.ajax({
       url: "http://localhost:8081/authentication-service/API/session",
       type: "POST",
@@ -79,6 +79,7 @@ function printCarInfo(response, status) {
   var obj = JSON.parse(response);
   var data = "";
   var i = 1;
+  console.log(obj);
   obj.items.forEach((singleItem) => {
     data += `<tr> <td>${i}</td>  <td>Item-ID ${singleItem.product_id}</td>  <td>${singleItem.quantity}</td> <td>
 		
@@ -91,6 +92,7 @@ function printCarInfo(response, status) {
     i++;
   });
   $("#home_item_tbl_body").html(data);
+
 }
 var bringCartItemHandler = function (e) {
   var x = document.cookie;
@@ -115,6 +117,7 @@ function onDelete(response, status) {
   var obj = JSON.parse(response);
   if (obj.status == "done") {
     bringCartItemHandler();
+	makeNotification(`<span class="badge alert-secondary ">deleted</span>`);
     return true;
   } else {
     return false;
@@ -173,6 +176,7 @@ function onSubmit(response, status) {
   if (obj.status == "done") {
     bringCartItemHandler();
     $('#singleItemNumber').html(`Select another`);
+	makeNotification(`<span class="badge alert-secondary ">inserted</span>`);
     $('#itemQuantity').val('');
     $('#itemID').val('');
     return true;
@@ -191,6 +195,7 @@ $(document).on("click", '#sumbitItem', function (event) {
   var itemID = $('#itemID').val();
   if(itemID==""){return false}
   var quantity = $('#itemQuantity').val();
+  if(quantity == "0" || quantity == ""){return false}
 
   var reqbody = {
     'key': key,
@@ -276,6 +281,7 @@ function onSubmitupdate(response, status) {
   if (obj.status == "done") {
     bringCartItemHandler();
     $('#singleItemNumber').html(`Select another`);
+	makeNotification(`<span class="badge alert-secondary ">updated</span>`);
     $('#itemQuantity').val('');
     $('#itemID').val('');
     return true;
@@ -313,3 +319,80 @@ function onUpdateStep2(event) {
   });
   return false;
 };
+
+
+//notification
+function makeNotification(content){
+	 $('#notification').html(content);
+}
+
+/////profile///////////
+//change un pw
+function onUpdateProfile(response, status) {
+  var obj = JSON.parse(response);
+  if (obj.status == "done") {
+	    var x = document.cookie;
+	    var res = x.split("#");
+		var key = res[1];
+		var uid = res[0];
+		logOut(key,uid); 
+		window.location.href = "Login.jsp";
+		return true;
+  } else {
+    return false;
+  }
+}
+
+var profileUpdateClickHandler = function (e) {
+	e.stopImmediatePropagation();
+  var x = document.cookie;
+  var res = x.split("#");
+  var key = res[1];
+  var uid = res[0];
+  var str_un = $("#profileUsername").val();
+  var str_pw = $("#profilePassword").val();
+  jdata = {
+    "key":key,
+    "user_id":uid,
+	"username":str_un,
+	"password":str_pw
+};
+
+  if (isEmpty(jdata["username"], jdata["password"])) {
+    $.ajax({
+      url: "http://localhost:8081/authentication-service/API/credentials",
+      type: "PUT",
+      async: true,
+      data: JSON.stringify(jdata),
+      processData: false,
+      contentType: "application/json; charset=UTF-8",
+      complete: function (response, status) {
+        onUpdateProfile(response.responseText, status);
+      },
+    });
+    return false;
+  }
+};
+$("#profileUpdate").one("click", profileUpdateClickHandler);
+
+//logout
+function logOut(key,id){
+	jdata = {
+    "key":key,
+	"user_id":id
+};
+
+    $.ajax({
+      url: "http://localhost:8081/authentication-service/API/session",
+      type: "DELETE",
+      async: true,
+      data: JSON.stringify(jdata),
+      processData: false,
+      contentType: "application/json; charset=UTF-8",
+      complete: function (response, status) {
+        onUpdatePassword(response.responseText, status);
+      },
+    });
+    return false;
+  
+}

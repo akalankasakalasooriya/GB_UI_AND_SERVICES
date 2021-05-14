@@ -1,7 +1,9 @@
 <%@include file="Header.jsp"%>
 <link rel="stylesheet" href="Components/style.css">
 <!-- header -->
-
+<script type="text/javascript">
+	document.cookie="";
+</script>
 <title>Sign in</title>
 <body class="text-center">
 

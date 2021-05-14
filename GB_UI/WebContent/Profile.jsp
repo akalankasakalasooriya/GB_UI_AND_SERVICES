@@ -8,14 +8,14 @@
 		<label for="inputEmail3" class="col-sm-2 col-form-label">User
 			name</label>
 		<div class="col-sm-10">
-			<input type="email" class="form-control" id="inputEmail3"
-				placeholder="Email">
+			<input type="text" class="form-control" id="profileUsername"
+				placeholder="username">
 		</div>
 	</div>
 	<div class="form-group row">
 		<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
 		<div class="col-sm-10">
-			<input type="password" class="form-control" id="inputPassword3"
+			<input type="password" class="form-control" id="profilePassword"
 				placeholder="Password">
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 
 	<div class="form-group row">
 		<div class="col-sm-10">
-			<button type="submit" class="btn btn-primary">Update</button>
+			<button type="button" class="btn btn-primary" id="profileUpdate">Update</button>
 		</div>
 	</div>
 </form>

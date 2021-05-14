@@ -2,14 +2,7 @@
 <!-- header -->
 <title>Home</title>
 <%@include file="NavBar.jsp"%>
-<script type="text/javascript">
-	var x = document.cookie;
-	var res = x.split('#')
-	console.log(res[1]);
-	if (res[1] == "") {
-		window.location.href = "Login.jsp";
-	}
-</script>
+
 <div class="container">
 	<div class="row">
 		<div class="col">
@@ -47,7 +40,10 @@
 							<input type="hidden" class="form-control" id="itemID">
 						</div>
 						<div class="col">
-							<button type="button" id="sumbitItem" class="d-inline btn btn-primary">Add item to cart</button>
+							<button type="button" id="sumbitItem" class="d-inline btn btn-primary">Add</button>
+						</div>
+						<div class="col" id="notification">
+							
 						</div>
 					</div>
 				</form>
@@ -66,7 +62,6 @@
 			</tr>
 		</thead>
 		<tbody id="home_item_tbl_body">
-
 		</tbody>
 	</table>
 	<script>
